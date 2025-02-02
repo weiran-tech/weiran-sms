@@ -1,0 +1,30 @@
+{
+    "name" : "poppy/sms",
+    "description" : "Poppy Sms 扩展.",
+    "license" : "MIT",
+    "type" : "poppy",
+    "authors" : [
+        {
+            "name" : "Mark Zhao",
+            "email" : "zhaody901@126.com"
+        }
+    ],
+    "require" : {
+        "php": "^8.1",
+        "poppy/system" : "10.0.x-dev"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Poppy\\Sms\\" : "src/"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
+            "Poppy\\Sms\\Tests\\" : "tests/"
+        }
+    },
+    "config" : {
+        "preferred-install" : "dist"
+    },
+    "minimum-stability" : "dev"
+}

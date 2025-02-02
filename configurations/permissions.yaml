@@ -1,0 +1,13 @@
+-
+  title : 短信
+  description : 短信管理
+  slug : backend:py-sms
+  groups :
+    -
+      slug : global
+      title : 短信管理
+      description : 短信管理
+      permissions :
+        -
+          slug : manage
+          description : 短信管理

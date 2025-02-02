@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace Weiran\Sms\Classes;
+
+use Weiran\Sms\Action\Sms;
+use Weiran\Sms\Classes\Contracts\SmsContract;
+
+/**
+ * 本地发送短信, 记录在日志中
+ */
+class LocalSmsProvider extends BaseSms implements SmsContract
+{
+
+    /**
+     * @inheritDoc
+     */
+    public function send(string $type, $mobile, array $params = [], $sign = ''): bool
+    {
+        $this->setScope(Sms::SCOPE_LOCAL);
+        if (!$this->checkSms($mobile, $type, $sign)) {
+            return false;
+        }
+        // 未选择则使用日志, 线上不记录日志
+        $sign    = $this->sign;
+        $trans   = sys_trans($this->sms['code'], $params);
+        $content = ($sign ? "[{$sign}]" : '') . $trans;
+        sys_info(self::class, $content, true);
+
+        return true;
+    }
+}
