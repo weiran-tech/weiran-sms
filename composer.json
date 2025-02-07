@@ -15,12 +15,12 @@
     },
     "autoload" : {
         "psr-4" : {
-            "Poppy\\Sms\\" : "src/"
+            "Weiran\\Sms\\" : "src/"
         }
     },
     "autoload-dev" : {
         "psr-4" : {
-            "Poppy\\Sms\\Tests\\" : "tests/"
+            "Weiran\\Sms\\Tests\\" : "tests/"
         }
     },
     "config" : {
