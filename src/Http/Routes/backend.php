@@ -5,7 +5,7 @@ declare(strict_types = 1);
 use Illuminate\Routing\Router;
 
 Route::group([
-    'namespace' => 'Poppy\Sms\Http\Request\Backend',
+    'namespace' => 'Weiran\Sms\Http\Request\Backend',
 ], function (Router $router) {
     // 短信模版配置
     $router->get('sms', 'SmsController@index')
