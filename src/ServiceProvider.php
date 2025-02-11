@@ -5,13 +5,13 @@ declare(strict_types = 1);
 namespace Weiran\Sms;
 
 use Weiran\Framework\Exceptions\ModuleNotFoundException;
-use Weiran\Framework\Support\PoppyServiceProvider;
+use Weiran\Framework\Support\WeiranServiceProvider;
 use Weiran\Sms\Action\Sms;
 use Weiran\Sms\Classes\Contracts\SmsContract;
 use Weiran\Sms\Classes\SmsProvider;
 use Weiran\Sms\Http\RouteServiceProvider;
 
-class ServiceProvider extends PoppyServiceProvider
+class ServiceProvider extends WeiranServiceProvider
 {
 
     /**
