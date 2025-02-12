@@ -106,7 +106,7 @@ class Sms
     {
         $rates = [];
         foreach ($sendTypes as $sendType) {
-            $rate = (int) sys_setting('wr-sms::sms.send_rate_' . $sendType);
+            $rate = (int) sys_setting('weiran-sms::sms.send_rate_' . $sendType);
             if ($rate) {
                 $rates[$sendType] = $rate;
             }

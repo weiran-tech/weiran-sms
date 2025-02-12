@@ -15,6 +15,6 @@ class PySmsDef
      */
     public static function ckTemplate(): string
     {
-        return 'wr-sms::sms.template';
+        return 'weiran-sms::sms.template';
     }
 }

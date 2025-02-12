@@ -8,5 +8,5 @@ backend :
       children :
         -
           title : 短信模板
-          route : wr-sms:backend.sms.index
-          permission : backend:wr-sms.global.manage
+          route : weiran-sms:backend.sms.index
+          permission : backend:weiran-sms.global.manage
