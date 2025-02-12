@@ -25,7 +25,7 @@ class SendTypeVolc implements ServiceArray
             'title'    => '火山云',
             'provider' => VolcSmsProvider::class,
             'setting'  => FormSettingVolc::class,
-            'route'    => 'wr-sms:backend.store.volc',
+            'route'    => 'weiran-sms:backend.store.volc',
         ];
     }
 }

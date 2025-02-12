@@ -14,7 +14,7 @@ class FormSettingLianLu extends FormSettingBase
 
     protected $withContent = true;
 
-    protected $group = 'wr-sms::sms';
+    protected $group = 'weiran-sms::sms';
 
     /**
      * Build a form here.
