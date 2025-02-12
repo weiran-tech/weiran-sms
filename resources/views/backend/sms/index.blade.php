@@ -1,4 +1,4 @@
-@extends('py-mgr-page::backend.tpl.default')
+@extends('weiran-mgr-page::backend.tpl.default')
 @section('backend-main')
     <div class="layui-card-header">
         短信模板
