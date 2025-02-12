@@ -27,7 +27,7 @@ class RouteServiceProvider extends \Weiran\Framework\Application\RouteServicePro
     protected function mapBackendRoutes(): void
     {
         Route::group([
-            'prefix'     => $this->prefix . '/py-sms',
+            'prefix'     => $this->prefix . '/wr-sms',
             'middleware' => 'backend-auth',
         ], function () {
             require_once __DIR__ . '/Routes/backend.php';

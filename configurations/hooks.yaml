@@ -1,8 +1,8 @@
 -
-  name: 'poppy.sms.send_type'
-  hooks:
-    - '\Poppy\Sms\Hooks\Sms\SendTypeLocal'
-    - '\Poppy\Sms\Hooks\Sms\SendTypeAliyun'
-    - '\Poppy\Sms\Hooks\Sms\SendTypeChuanglan'
-    - '\Poppy\Sms\Hooks\Sms\SendTypeLianLu'
-    - '\Poppy\Sms\Hooks\Sms\SendTypeVolc'
+  name : 'weiran.sms.send_type'
+  hooks :
+    - '\Weiran\Sms\Hooks\Sms\SendTypeLocal'
+    - '\Weiran\Sms\Hooks\Sms\SendTypeAliyun'
+    - '\Weiran\Sms\Hooks\Sms\SendTypeChuanglan'
+    - '\Weiran\Sms\Hooks\Sms\SendTypeLianLu'
+    - '\Weiran\Sms\Hooks\Sms\SendTypeVolc'

@@ -9,20 +9,20 @@ Route::group([
 ], function (Router $router) {
     // 短信模版配置
     $router->get('sms', 'SmsController@index')
-        ->name('py-sms:backend.sms.index');
+        ->name('wr-sms:backend.sms.index');
     $router->any('sms/establish/{id?}', 'SmsController@establish')
-        ->name('py-sms:backend.sms.establish');
+        ->name('wr-sms:backend.sms.establish');
     $router->any('sms/destroy/{id}', 'SmsController@destroy')
-        ->name('py-sms:backend.sms.destroy');
+        ->name('wr-sms:backend.sms.destroy');
 
     $router->any('sms/store', 'SmsController@store')
-        ->name('py-sms:backend.sms.store');
+        ->name('wr-sms:backend.sms.store');
     $router->any('store/aliyun', 'StoreController@aliyun')
-        ->name('py-sms:backend.store.aliyun');
+        ->name('wr-sms:backend.store.aliyun');
     $router->any('store/chuanglan', 'StoreController@chuanglan')
-        ->name('py-sms:backend.store.chuanglan');
+        ->name('wr-sms:backend.store.chuanglan');
     $router->any('store/lianlu', 'StoreController@lianlu')
-        ->name('py-sms:backend.store.lianlu');
+        ->name('wr-sms:backend.store.lianlu');
     $router->any('store/volc', 'StoreController@volc')
-        ->name('py-sms:backend.store.volc');
+        ->name('wr-sms:backend.store.volc');
 });

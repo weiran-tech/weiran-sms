@@ -15,7 +15,7 @@ use Weiran\System\Setting\Repository\SettingRepository;
 
 class FormSettingSms extends FormSettingBase
 {
-    protected $group = 'py-sms::sms';
+    protected $group = 'wr-sms::sms';
 
     protected $withContent = true;
 

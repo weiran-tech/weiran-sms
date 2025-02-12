@@ -19,82 +19,82 @@ class ServiceProvider extends WeiranServiceProvider
      * @return void
      * @throws ModuleNotFoundException
      */
-    public function boot()
+    public function boot(): void
     {
-        parent::boot('poppy.sms');
+        parent::boot('weiran.sms');
     }
 
     /**
      * Register the service provider.
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
 
         $this->registerConfig();
 
         // 配置文件
-        $this->mergeConfigFrom(dirname(__DIR__) . '/resources/config/sms.php', 'poppy.sms');
+        $this->mergeConfigFrom(dirname(__DIR__) . '/resources/config/sms.php', 'weiran.sms');
 
-        $this->app->bind('poppy.sms', function () {
+        $this->app->bind('weiran.sms', function () {
             return new SmsProvider;
         });
 
-        $this->app->alias('poppy.sms', SmsContract::class);
+        $this->app->alias('weiran.sms', SmsContract::class);
     }
 
     /**
      * Get the services provided by the provider.
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return [
-            'poppy.sms',
+            'weiran.sms',
         ];
     }
 
 
-    private function registerConfig()
+    private function registerConfig(): void
     {
         // 注册配置
         config([
-            'poppy.sms.sign' => sys_setting('py-sms::sms.sign'),
+            'weiran.sms.sign' => sys_setting('wr-sms::sms.sign'),
         ]);
-        $sendTypes = array_keys(sys_hook('poppy.sms.send_type'));
+        $sendTypes = array_keys(sys_hook('weiran.sms.send_type'));
         foreach ($sendTypes as $sendType) {
-            $rate = (int) sys_setting('py-sms::sms.send_rate_' . $sendType);
+            $rate = (int) sys_setting('wr-sms::sms.send_rate_' . $sendType);
             if ($rate) {
                 if ($sendType === Sms::SCOPE_ALIYUN) {
                     config([
-                        'poppy.sms.aliyun.access_key'    => sys_setting('py-sms::sms.aliyun_access_key'),
-                        'poppy.sms.aliyun.access_secret' => sys_setting('py-sms::sms.aliyun_access_secret'),
+                        'weiran.sms.aliyun.access_key'    => sys_setting('wr-sms::sms.aliyun_access_key'),
+                        'weiran.sms.aliyun.access_secret' => sys_setting('wr-sms::sms.aliyun_access_secret'),
                     ]);
                 }
                 if ($sendType === Sms::SCOPE_CHUANGLAN) {
                     config([
-                        'poppy.sms.chuanglan.access_key'        => sys_setting('py-sms::sms.chuanglan_access_key'),
-                        'poppy.sms.chuanglan.access_secret'     => sys_setting('py-sms::sms.chuanglan_access_secret'),
-                        'poppy.sms.chuanglan.cty_access_key'    => sys_setting('py-sms::sms.chuanglan_cty_access_key'),
-                        'poppy.sms.chuanglan.cty_access_secret' => sys_setting('py-sms::sms.chuanglan_cty_access_secret'),
+                        'weiran.sms.chuanglan.access_key'        => sys_setting('wr-sms::sms.chuanglan_access_key'),
+                        'weiran.sms.chuanglan.access_secret'     => sys_setting('wr-sms::sms.chuanglan_access_secret'),
+                        'weiran.sms.chuanglan.cty_access_key'    => sys_setting('wr-sms::sms.chuanglan_cty_access_key'),
+                        'weiran.sms.chuanglan.cty_access_secret' => sys_setting('wr-sms::sms.chuanglan_cty_access_secret'),
                     ]);
                 }
                 if ($sendType === Sms::SCOPE_LIANLU) {
                     config([
-                        'poppy.sms.lianlu.mch_id'      => sys_setting('py-sms::sms.lianlu_mch_id'),
-                        'poppy.sms.lianlu.app_id'      => sys_setting('py-sms::sms.lianlu_app_id'),
-                        'poppy.sms.lianlu.app_key'     => sys_setting('py-sms::sms.lianlu_app_key'),
-                        'poppy.sms.lianlu.cty_mch_id'  => sys_setting('py-sms::sms.lianlu_cty_mch_id'),
-                        'poppy.sms.lianlu.cty_app_id'  => sys_setting('py-sms::sms.chuanglan_cty_app_id'),
-                        'poppy.sms.lianlu.cty_app_key' => sys_setting('py-sms::sms.chuanglan_cty_app_key'),
+                        'weiran.sms.lianlu.mch_id'      => sys_setting('wr-sms::sms.lianlu_mch_id'),
+                        'weiran.sms.lianlu.app_id'      => sys_setting('wr-sms::sms.lianlu_app_id'),
+                        'weiran.sms.lianlu.app_key'     => sys_setting('wr-sms::sms.lianlu_app_key'),
+                        'weiran.sms.lianlu.cty_mch_id'  => sys_setting('wr-sms::sms.lianlu_cty_mch_id'),
+                        'weiran.sms.lianlu.cty_app_id'  => sys_setting('wr-sms::sms.chuanglan_cty_app_id'),
+                        'weiran.sms.lianlu.cty_app_key' => sys_setting('wr-sms::sms.chuanglan_cty_app_key'),
                     ]);
                 }
                 if ($sendType === Sms::SCOPE_VOLC) {
                     config([
-                        'poppy.sms.volc.access_key'      => sys_setting('py-sms::sms.volc_access_key'),
-                        'poppy.sms.volc.access_secret'   => sys_setting('py-sms::sms.volc_access_secret'),
-                        'poppy.sms.volc.default_account' => sys_setting('py-sms::sms.volc_default_account'),
+                        'weiran.sms.volc.access_key'      => sys_setting('wr-sms::sms.volc_access_key'),
+                        'weiran.sms.volc.access_secret'   => sys_setting('wr-sms::sms.volc_access_secret'),
+                        'weiran.sms.volc.default_account' => sys_setting('wr-sms::sms.volc_default_account'),
                     ]);
                 }
             }

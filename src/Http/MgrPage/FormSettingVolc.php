@@ -14,7 +14,7 @@ class FormSettingVolc extends FormSettingBase
 
     protected $withContent = true;
 
-    protected $group = 'py-sms::sms';
+    protected $group = 'wr-sms::sms';
 
     /**
      * Build a form here.

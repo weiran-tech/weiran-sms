@@ -22,7 +22,7 @@ class SendTypeAliyun implements ServiceArray
             'title'    => '阿里云',
             'provider' => AliyunSmsProvider::class,
             'setting'  => FormSettingAliyun::class,
-            'route'    => 'py-sms:backend.store.aliyun',
+            'route'    => 'wr-sms:backend.store.aliyun',
         ];
     }
 }

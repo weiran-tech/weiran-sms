@@ -22,7 +22,7 @@ class SendTypeChuanglan implements ServiceArray
             'title'    => '创蓝',
             'provider' => ChuanglanSmsProvider::class,
             'setting'  => FormSettingChuanglan::class,
-            'route'    => 'py-sms:backend.store.chuanglan',
+            'route'    => 'wr-sms:backend.store.chuanglan',
         ];
     }
 }

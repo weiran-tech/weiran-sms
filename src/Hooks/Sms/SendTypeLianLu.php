@@ -22,7 +22,7 @@ class SendTypeLianLu implements ServiceArray
             'title'    => '联麓',
             'provider' => LianLuSmsProvider::class,
             'setting'  => FormSettingLianLu::class,
-            'route'    => 'py-sms:backend.store.lianlu',
+            'route'    => 'wr-sms:backend.store.lianlu',
         ];
     }
 }
