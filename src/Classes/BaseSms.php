@@ -56,7 +56,7 @@ abstract class BaseSms
             return $this->setError('请设置短信模板');
         }
 
-        $configSign = (string) config('poppy.sms.sign', '');
+        $configSign = (string) config('weiran.sms.sign', '');
         $this->sign = $configSign;
         if ($sign) {
             $this->sign = $sign;

@@ -27,7 +27,7 @@ abstract class BaseSms extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->conf   = $this->readJson('poppy.sms', 'tests/config/account.json');
+        $this->conf   = $this->readJson('weiran.sms', 'tests/config/account.json');
         $this->mobile = data_get($this->conf, 'mobile');
     }
 }

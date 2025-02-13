@@ -24,7 +24,7 @@ class VolcSmsProvider extends BaseSms implements SmsContract
 
         $templateId = $this->sms['code'] ?? '';
 
-        $smsAccount = sys_get($params, 'SmsAccount', config('poppy.sms.volc.default_account'));
+        $smsAccount = sys_get($params, 'SmsAccount', config('weiran.sms.volc.default_account'));
         unset($params['SmsAccount']);
 
         $templateParam = $params;
@@ -123,8 +123,8 @@ class VolcSmsProvider extends BaseSms implements SmsContract
      */
     private function initClient()
     {
-        $accessKeyId     = config('poppy.sms.volc.access_key');
-        $accessKeySecret = config('poppy.sms.volc.access_secret');
+        $accessKeyId     = config('weiran.sms.volc.access_key');
+        $accessKeySecret = config('weiran.sms.volc.access_secret');
 
         $client = VolcSms::getInstance();
         $client->setAccessKey($accessKeyId);

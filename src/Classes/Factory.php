@@ -23,7 +23,7 @@ class Factory
     public static function instance(): BaseSms
     {
         $sendType = Sms::rateSmsType();
-        $hooks    = sys_hook('poppy.sms.send_type');
+        $hooks    = sys_hook('weiran.sms.send_type');
         if (!$sendType) {
             $sendType = Sms::SCOPE_LOCAL;
         }

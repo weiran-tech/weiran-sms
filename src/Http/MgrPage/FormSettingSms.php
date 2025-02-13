@@ -38,7 +38,7 @@ class FormSettingSms extends FormSettingBase
 
     public function form(): void
     {
-        $sendTypes = sys_hook('poppy.sms.send_type');
+        $sendTypes = sys_hook('weiran.sms.send_type');
         $table     = [];
         foreach ($sendTypes as $key => $desc) {
             $table[] = [

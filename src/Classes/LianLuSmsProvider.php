@@ -56,14 +56,14 @@ class LianLuSmsProvider extends BaseSms implements SmsContract
     private function initConfig($mobiles): void
     {
         if (!UtilHelper::isChMobile($mobiles)) {
-            $mchId  = config('poppy.sms.lianlu.cty_mch_id');
-            $appId  = config('poppy.sms.lianlu.cty_app_id');
-            $appKey = config('poppy.sms.lianlu.cty_app_key');
+            $mchId  = config('weiran.sms.lianlu.cty_mch_id');
+            $appId  = config('weiran.sms.lianlu.cty_app_id');
+            $appKey = config('weiran.sms.lianlu.cty_app_key');
         }
         else {
-            $mchId  = config('poppy.sms.lianlu.mch_id');
-            $appId  = config('poppy.sms.lianlu.app_id');
-            $appKey = config('poppy.sms.lianlu.app_key');
+            $mchId  = config('weiran.sms.lianlu.mch_id');
+            $appId  = config('weiran.sms.lianlu.app_id');
+            $appKey = config('weiran.sms.lianlu.app_key');
         }
         $this->llApi = new SmsApi($mchId, $appId, $appKey, $this->sign);
     }

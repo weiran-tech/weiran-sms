@@ -70,8 +70,8 @@ class AliyunSmsProvider extends BaseSms implements SmsContract
      */
     private function initClient(): Dysmsapi
     {
-        $accessKeyId     = config('poppy.sms.aliyun.access_key');
-        $accessKeySecret = config('poppy.sms.aliyun.access_secret');
+        $accessKeyId     = config('weiran.sms.aliyun.access_key');
+        $accessKeySecret = config('weiran.sms.aliyun.access_secret');
         if (!class_exists(Dysmsapi::class)) {
             throw new SmsException('你需要手动安装 `alibabacloud/dysmsapi-20170525` 组件');
         }

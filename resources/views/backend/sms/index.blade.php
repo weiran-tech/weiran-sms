@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="layui-card-body">
-        {!! app('poppy.mgr-page.form')->scopes(Poppy\Sms\Action\Sms::kvPlatform(), $scope) !!}
+        {!! app('weiran.mgr-page.form')->scopes(Poppy\Sms\Action\Sms::kvPlatform(), $scope) !!}
         <div class="mt8">
             <table class="layui-table mt8" {!! mgr_table_open() !!}>
                 <thead>

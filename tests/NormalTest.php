@@ -18,7 +18,7 @@ class NormalTest extends BaseSms
      */
     public function testCaptcha(): void
     {
-        $Sms = app('poppy.sms');
+        $Sms = app('weiran.sms');
         if ($Sms->send('captcha', $this->mobile, [
             'code' => 'Test_' . Str::random(4),
         ])) {

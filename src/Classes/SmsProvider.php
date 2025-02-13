@@ -30,7 +30,7 @@ class SmsProvider extends BaseSms implements SmsContract
             $driver = Sms::SCOPE_LOCAL;
         }
 
-        $hooks       = sys_hook('poppy.sms.send_type');
+        $hooks       = sys_hook('weiran.sms.send_type');
         $sender      = $hooks[$driver];
         $senderClass = $sender['provider'] ?? LocalSmsProvider::class;
 

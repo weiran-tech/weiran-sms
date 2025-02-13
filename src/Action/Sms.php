@@ -53,7 +53,7 @@ class Sms
      */
     public static function kvType(string $key = null, bool $check_key = false)
     {
-        $desc = collect(config('poppy.sms.types') ?: [])->pluck('title', 'type')->toArray();
+        $desc = collect(config('weiran.sms.types') ?: [])->pluck('title', 'type')->toArray();
         return kv($desc, $key, $check_key);
     }
 
@@ -65,7 +65,7 @@ class Sms
      */
     public static function kvPlatform(string $key = null, bool $check_key = false)
     {
-        $sendTypes     = sys_hook('poppy.sms.send_type');
+        $sendTypes     = sys_hook('weiran.sms.send_type');
         $desc['local'] = '本地';
         foreach ($sendTypes as $k => $d) {
             $desc[$k] = $d['title'];
@@ -94,7 +94,7 @@ class Sms
      */
     public static function rateSmsType(): string
     {
-        $sendTypes = array_keys(sys_hook('poppy.sms.send_type'));
+        $sendTypes = array_keys(sys_hook('weiran.sms.send_type'));
 
         return self::rateSmsDriver($sendTypes);
     }
@@ -120,7 +120,7 @@ class Sms
      */
     public static function getSendType()
     {
-        return sys_hook('poppy.sms.send_type');
+        return sys_hook('weiran.sms.send_type');
     }
 
     /**
@@ -135,7 +135,7 @@ class Sms
         $templates = collect((new Sms())->getTemplates());
 
         // 获取所有的驱动
-        $hooks = sys_hook('poppy.sms.send_type');
+        $hooks = sys_hook('weiran.sms.send_type');
 
         // 对驱动过滤，查找符合条件的驱动
         $types = [];

@@ -34,7 +34,7 @@ class ChuanglanTest extends BaseSms
         $Sms = new ChuanglanSmsProvider();
         if ($Sms->send('captcha', $this->mobile, [
             'code' => 'Test_' . Str::random(4),
-        ], config('poppy.sms.sign'))) {
+        ], config('weiran.sms.sign'))) {
             $this->assertTrue(true);
         }
         else {

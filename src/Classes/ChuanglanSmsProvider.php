@@ -53,12 +53,12 @@ class ChuanglanSmsProvider extends BaseSms implements SmsContract
     private function initConfig($mobiles): void
     {
         if (!UtilHelper::isChMobile($mobiles)) {
-            $apiAccount  = config('poppy.sms.chuanglan.cty_access_key');
-            $apiPassword = config('poppy.sms.chuanglan.cty_access_secret');
+            $apiAccount  = config('weiran.sms.chuanglan.cty_access_key');
+            $apiPassword = config('weiran.sms.chuanglan.cty_access_secret');
         }
         else {
-            $apiAccount  = config('poppy.sms.chuanglan.access_key');
-            $apiPassword = config('poppy.sms.chuanglan.access_secret');
+            $apiAccount  = config('weiran.sms.chuanglan.access_key');
+            $apiPassword = config('weiran.sms.chuanglan.access_secret');
         }
         $this->clApi = new SmsApi($apiAccount, $apiPassword);
     }
