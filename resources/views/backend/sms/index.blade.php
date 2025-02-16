@@ -3,14 +3,14 @@
     <div class="layui-card-header">
         短信模板
         <div class="pull-right">
-            {!! mgr_actions(function (Poppy\MgrPage\Classes\Operations $operations) use ($scope){
-                $operations->create(route_url('wr-sms:backend.sms.establish', null, ['_scope'=> $scope]), '创建模板');
-                $operations->iframe( '短信设置', route_url('wr-sms:backend.sms.store'))->widthLarge()->icon('sliders')->sm();
+            {!! mgr_actions(function (Weiran\MgrPage\Classes\Operations $operations) use ($scope){
+                $operations->create(route_url('weiran-sms:backend.sms.establish', null, ['_scope'=> $scope]), '创建模板');
+                $operations->iframe( '短信设置', route_url('weiran-sms:backend.sms.store'))->widthLarge()->icon('sliders')->sm();
             }) !!}
         </div>
     </div>
     <div class="layui-card-body">
-        {!! app('weiran.mgr-page.form')->scopes(Poppy\Sms\Action\Sms::kvPlatform(), $scope) !!}
+        {!! app('weiran.mgr-page.form')->scopes(Weiran\Sms\Action\Sms::kvPlatform(), $scope) !!}
         <div class="mt8">
             <table class="layui-table mt8" {!! mgr_table_open() !!}>
                 <thead>
@@ -29,9 +29,9 @@
                         </td>
                         <td>{{$item['code']}}</td>
                         <td>
-                            {!! mgr_actions(function (Poppy\MgrPage\Classes\Operations $operations) use ($item){
-                               $operations->edit(route_url('wr-sms:backend.sms.establish', [$item['scope'].':'.$item['type']]));
-                               $operations->delete(route('wr-sms:backend.sms.destroy', [$item['scope'].':'.$item['type']]), '确认删除');
+                            {!! mgr_actions(function (Weiran\MgrPage\Classes\Operations $operations) use ($item){
+                               $operations->edit(route_url('weiran-sms:backend.sms.establish', [$item['scope'].':'.$item['type']]));
+                               $operations->delete(route('weiran-sms:backend.sms.destroy', [$item['scope'].':'.$item['type']]), '确认删除');
                             }); !!}
                         </td>
                     </tr>

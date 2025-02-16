@@ -18,11 +18,11 @@ class ChuanglanTest extends BaseSms
         parent::setUp();
         // config
         config([
-            'poppy.sms.sign'                        => (string) data_get($this->conf, 'chuanglan_sign'),
-            'poppy.sms.chuanglan.access_key'        => data_get($this->conf, 'chuanglan_access_key'),
-            'poppy.sms.chuanglan.access_secret'     => data_get($this->conf, 'chuanglan_access_secret'),
-            'poppy.sms.chuanglan.cty_access_key'    => data_get($this->conf, 'chuanglan_cty_access_key'),
-            'poppy.sms.chuanglan.cty_access_secret' => data_get($this->conf, 'chuanglan_cty_access_secret'),
+            'weiran.sms.sign'                        => (string) data_get($this->conf, 'chuanglan_sign'),
+            'weiran.sms.chuanglan.access_key'        => data_get($this->conf, 'chuanglan_access_key'),
+            'weiran.sms.chuanglan.access_secret'     => data_get($this->conf, 'chuanglan_access_secret'),
+            'weiran.sms.chuanglan.cty_access_key'    => data_get($this->conf, 'chuanglan_cty_access_key'),
+            'weiran.sms.chuanglan.cty_access_secret' => data_get($this->conf, 'chuanglan_cty_access_secret'),
         ]);
     }
 

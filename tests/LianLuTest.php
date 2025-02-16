@@ -20,10 +20,10 @@ class LianLuTest extends BaseSms
         parent::setUp();
         // config
         config([
-            'poppy.sms.sign'           => (string) data_get($this->conf, 'lianlu_sign'),
-            'poppy.sms.lianlu.mch_id'  => data_get($this->conf, 'lianlu_mch_id'),
-            'poppy.sms.lianlu.app_id'  => data_get($this->conf, 'lianlu_app_id'),
-            'poppy.sms.lianlu.app_key' => data_get($this->conf, 'lianlu_app_key'),
+            'weiran.sms.sign'           => (string) data_get($this->conf, 'lianlu_sign'),
+            'weiran.sms.lianlu.mch_id'  => data_get($this->conf, 'lianlu_mch_id'),
+            'weiran.sms.lianlu.app_id'  => data_get($this->conf, 'lianlu_app_id'),
+            'weiran.sms.lianlu.app_key' => data_get($this->conf, 'lianlu_app_key'),
         ]);
     }
 

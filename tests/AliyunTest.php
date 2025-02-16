@@ -23,8 +23,8 @@ class AliyunTest extends BaseSms
 
         // config
         config([
-            'poppy.sms.aliyun.access_key'    => data_get($this->conf, 'aliyun_access_key'),
-            'poppy.sms.aliyun.access_secret' => data_get($this->conf, 'aliyun_access_secret'),
+            'weiran.sms.aliyun.access_key'    => data_get($this->conf, 'aliyun_access_key'),
+            'weiran.sms.aliyun.access_secret' => data_get($this->conf, 'aliyun_access_secret'),
         ]);
     }
 

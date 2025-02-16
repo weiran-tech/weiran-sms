@@ -23,7 +23,7 @@ class StoreController extends BackendController
         parent::__construct();
 
         self::$permission = [
-            'global' => 'backend:wr-sms.global.manage',
+            'global' => 'backend:weiran-sms.global.manage',
         ];
     }
 

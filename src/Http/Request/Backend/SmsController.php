@@ -28,7 +28,7 @@ class SmsController extends BackendController
         parent::__construct();
 
         self::$permission = [
-            'global' => 'backend:wr-sms.global.manage',
+            'global' => 'backend:weiran-sms.global.manage',
         ];
     }
 
@@ -43,7 +43,7 @@ class SmsController extends BackendController
         }
         $templates = $this->action()->getTemplates();
         $items     = $templates->where('scope', $scope);
-        return view('wr-sms::backend.sms.index', [
+        return view('weiran-sms::backend.sms.index', [
             'scope' => $scope,
             'items' => $items,
         ]);
