@@ -25,7 +25,7 @@
                     <tr>
                         <td>
                             <span class="J_tooltip"
-                                title="标识 : {{$item['type']}}">{{ Poppy\Sms\Action\Sms::kvType($item['type'])}}</span>
+                                title="标识 : {{$item['type']}}">{{ Weiran\Sms\Action\Sms::kvType($item['type'])}}</span>
                         </td>
                         <td>{{$item['code']}}</td>
                         <td>
