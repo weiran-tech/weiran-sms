@@ -1,5 +1,6 @@
-backend :
+-
   title : 短信
+  type : backend
   groups :
     -
       title : 短信
