@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Weiran\Framework\Classes\Traits\AppTrait;
 use Weiran\Framework\Exceptions\HintException;
-use Weiran\Sms\Classes\PySmsDef;
+use Weiran\Sms\Classes\WeiranSmsDef;
 use Weiran\System\Classes\Traits\SystemTrait;
 use Weiran\System\Exceptions\SettingKeyNotMatchException;
 use Weiran\System\Exceptions\SettingValueOutOfRangeException;
@@ -42,7 +42,7 @@ class Sms
 
     public function __construct()
     {
-        $this->templates = collect(sys_setting(PySmsDef::ckTemplate(), []) ?: []);
+        $this->templates = collect(sys_setting(WeiranSmsDef::ckTemplate(), []) ?: []);
     }
 
     /**
@@ -259,7 +259,7 @@ class Sms
      */
     private function save(): bool
     {
-        $this->sysSetting()->set(PySmsDef::ckTemplate(), $this->templates->toArray());
+        $this->sysSetting()->set(WeiranSmsDef::ckTemplate(), $this->templates->toArray());
         return true;
     }
 }

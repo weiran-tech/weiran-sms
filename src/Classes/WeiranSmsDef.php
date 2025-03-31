@@ -7,7 +7,7 @@ namespace Weiran\Sms\Classes;
 /**
  * 短信定义
  */
-class PySmsDef
+class WeiranSmsDef
 {
     /**
      * 模板缓存

@@ -7,7 +7,7 @@ namespace Weiran\Sms\Classes;
 /**
  * Sms Helper
  */
-class PySmsHelper
+class WeiranSmsHelper
 {
     /**
      * 模板缓存

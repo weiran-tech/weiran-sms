@@ -7,7 +7,7 @@ namespace Weiran\Sms\Tests;
 use Illuminate\Support\Str;
 use Weiran\Sms\Action\Sms;
 use Weiran\Sms\Classes\AliyunSmsProvider;
-use Weiran\Sms\Classes\PySmsHelper;
+use Weiran\Sms\Classes\WeiranSmsHelper;
 use Weiran\System\Exceptions\SettingKeyNotMatchException;
 use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
@@ -33,19 +33,19 @@ class AliyunTest extends BaseSms
     {
         $mobiles = '15555555551';
         // single
-        $this->assertEquals('15555555551', PySmsHelper::transToAliyunMobile($mobiles));
+        $this->assertEquals('15555555551', WeiranSmsHelper::transToAliyunMobile($mobiles));
 
         // single
         $mobiles = ['86-15555555552'];
-        $this->assertEquals('8615555555552', PySmsHelper::transToAliyunMobile($mobiles));
+        $this->assertEquals('8615555555552', WeiranSmsHelper::transToAliyunMobile($mobiles));
 
         // multi
         $mobiles = ['15555555553', '16666666666'];
-        $this->assertEquals('15555555553,16666666666', PySmsHelper::transToAliyunMobile($mobiles));
+        $this->assertEquals('15555555553,16666666666', WeiranSmsHelper::transToAliyunMobile($mobiles));
 
         // multi string
         $mobiles = '15555555554,16666666666';
-        $this->assertEquals('15555555554,16666666666', PySmsHelper::transToAliyunMobile($mobiles));
+        $this->assertEquals('15555555554,16666666666', WeiranSmsHelper::transToAliyunMobile($mobiles));
     }
 
     /**
