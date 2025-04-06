@@ -26,12 +26,5 @@
     "config": {
         "preferred-install": "dist"
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Weiran\\Sms\\ServiceProvider"
-            ]
-        }
-    },
     "minimum-stability": "dev"
 }

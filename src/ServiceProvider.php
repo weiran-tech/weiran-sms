@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Weiran\Sms;
 
-use Illuminate\Contracts\Support\DeferrableProvider;
 use JsonException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -17,7 +16,7 @@ use Weiran\Sms\Http\RouteServiceProvider;
 use Weiran\System\Exceptions\SettingKeyNotMatchException;
 use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
-class ServiceProvider extends WeiranServiceProvider implements DeferrableProvider
+class ServiceProvider extends WeiranServiceProvider
 {
 
     /**
