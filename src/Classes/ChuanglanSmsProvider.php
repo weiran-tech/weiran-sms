@@ -4,10 +4,15 @@ declare(strict_types = 1);
 
 namespace Weiran\Sms\Classes;
 
+use JsonException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Weiran\Framework\Helper\UtilHelper;
 use Weiran\Sms\Action\Sms;
 use Weiran\Sms\Classes\Chuanglan\SmsApi;
 use Weiran\Sms\Classes\Contracts\SmsContract;
+use Weiran\System\Exceptions\SettingKeyNotMatchException;
+use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
 class ChuanglanSmsProvider extends BaseSms implements SmsContract
 {
@@ -15,6 +20,24 @@ class ChuanglanSmsProvider extends BaseSms implements SmsContract
      * @var SmsApi
      */
     private SmsApi $clApi;
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws SettingKeyNotMatchException
+     * @throws SettingValueOutOfRangeException
+     * @throws NotFoundExceptionInterface
+     * @throws JsonException
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        config([
+            'weiran.sms.chuanglan.access_key'        => sys_setting('weiran-sms::sms.chuanglan_access_key'),
+            'weiran.sms.chuanglan.access_secret'     => sys_setting('weiran-sms::sms.chuanglan_access_secret'),
+            'weiran.sms.chuanglan.cty_access_key'    => sys_setting('weiran-sms::sms.chuanglan_cty_access_key'),
+            'weiran.sms.chuanglan.cty_access_secret' => sys_setting('weiran-sms::sms.chuanglan_cty_access_secret'),
+        ]);
+    }
 
     /**
      * @inheritDoc

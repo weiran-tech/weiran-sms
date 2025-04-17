@@ -6,13 +6,16 @@ namespace Weiran\Sms\Action;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use JsonException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Throwable;
 use Weiran\Framework\Classes\Traits\AppTrait;
 use Weiran\Framework\Exceptions\HintException;
 use Weiran\Sms\Classes\WeiranSmsDef;
 use Weiran\System\Classes\Traits\SystemTrait;
 use Weiran\System\Exceptions\SettingKeyNotMatchException;
 use Weiran\System\Exceptions\SettingValueOutOfRangeException;
-use Throwable;
 
 /**
  * 短信模板
@@ -40,6 +43,13 @@ class Sms
      */
     private array $item;
 
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws SettingValueOutOfRangeException
+     * @throws SettingKeyNotMatchException
+     * @throws JsonException
+     */
     public function __construct()
     {
         $this->templates = collect(sys_setting(WeiranSmsDef::ckTemplate(), []) ?: []);
@@ -47,30 +57,28 @@ class Sms
 
     /**
      * 短信类型
-     * @param string|null $key       key
-     * @param bool        $check_key 检测key是否存在
+     * @param string|null $key key
      * @return array|string
      */
-    public static function kvType(string $key = null, bool $check_key = false)
+    public static function kvType(string $key = null): array|string
     {
         $desc = collect(config('weiran.sms.types') ?: [])->pluck('title', 'type')->toArray();
-        return kv($desc, $key, $check_key);
+        return kv($desc, $key);
     }
 
     /**
      * 平台类型
      * @param null|string $key
-     * @param false       $check_key
-     * @return array|bool|string
+     * @return array|string
      */
-    public static function kvPlatform(string $key = null, bool $check_key = false)
+    public static function kvPlatform(string $key = null): array|string
     {
         $sendTypes     = sys_hook('weiran.sms.send_type');
         $desc['local'] = '本地';
         foreach ($sendTypes as $k => $d) {
             $desc[$k] = $d['title'];
         }
-        return kv($desc, $key, $check_key);
+        return kv($desc, $key);
     }
 
     /**
@@ -91,28 +99,17 @@ class Sms
     /**
      * 获取现在配置分流的短信
      * @return string
+     * @throws ContainerExceptionInterface
+     * @throws JsonException
+     * @throws NotFoundExceptionInterface
+     * @throws SettingKeyNotMatchException
+     * @throws SettingValueOutOfRangeException
      */
     public static function rateSmsType(): string
     {
         $sendTypes = array_keys(sys_hook('weiran.sms.send_type'));
 
         return self::rateSmsDriver($sendTypes);
-    }
-
-    /**
-     * 抽取公共方法
-     */
-    private static function rateSmsDriver(array $sendTypes): string
-    {
-        $rates = [];
-        foreach ($sendTypes as $sendType) {
-            $rate = (int) sys_setting('weiran-sms::sms.send_rate_' . $sendType);
-            if ($rate) {
-                $rates[$sendType] = $rate;
-            }
-        }
-
-        return self::getRandType($rates);
     }
 
     /**
@@ -128,7 +125,15 @@ class Sms
      * 1. 获取所有的平台
      * 2. 过滤存在该模板的平台
      * 3. 再次进行过滤
+     * @param string $type
+     * @return string
+     * @throws ContainerExceptionInterface
+     * @throws JsonException
+     * @throws NotFoundExceptionInterface
+     * @throws SettingKeyNotMatchException
+     * @throws SettingValueOutOfRangeException
      */
+
     public static function rateSmsDriverByType(string $type): string
     {
         // 获取所有的模板
@@ -145,6 +150,61 @@ class Sms
             }
         }
         return self::rateSmsDriver($types);
+    }
+
+    /**
+     * 抽取公共方法
+     * @param array $sendTypes
+     * @return string
+     * @throws ContainerExceptionInterface
+     * @throws JsonException
+     * @throws NotFoundExceptionInterface
+     * @throws SettingKeyNotMatchException
+     * @throws SettingValueOutOfRangeException
+     */
+    private static function rateSmsDriver(array $sendTypes): string
+    {
+        $rates = [];
+        foreach ($sendTypes as $sendType) {
+            $rate = (int) sys_setting('weiran-sms::sms.send_rate_' . $sendType);
+            if ($rate) {
+                $rates[$sendType] = $rate;
+            }
+        }
+
+        return self::getRandType($rates);
+    }
+
+    /**
+     * @param array $rates
+     * @return string
+     */
+    private static function getRandType(array $rates): string
+    {
+        try {
+            $result = self::SCOPE_LOCAL;
+            if (!$rates) {
+                return $result;
+            }
+            if (count($rates) === 1) {
+                return (string) array_key_first($rates);
+            }
+            //概率数组的总概率精度
+            $sumRates = array_sum($rates);
+            //概率数组循环
+            foreach ($rates as $key => $rate) {
+                $randNum = random_int(1, $sumRates);
+                if ($randNum <= $rate) {
+                    $result = $key;
+                    break;
+                }
+                $sumRates -= $rate;
+            }
+
+            return (string) $result;
+        } catch (Throwable) {
+            return $result;
+        }
     }
 
     /**
@@ -170,7 +230,7 @@ class Sms
      * @param string $code
      * @return bool
      * @throws SettingKeyNotMatchException
-     * @throws SettingValueOutOfRangeException
+     * @throws SettingValueOutOfRangeException|JsonException
      */
     public function establish(string $id, string $code): bool
     {
@@ -202,13 +262,12 @@ class Sms
         throw new HintException('短信ID不存在');
     }
 
-
     /**
      * 刪除
      * @param string $id id
      * @return bool
      * @throws SettingKeyNotMatchException
-     * @throws SettingValueOutOfRangeException
+     * @throws SettingValueOutOfRangeException|JsonException
      */
     public function destroy(string $id): bool
     {
@@ -220,42 +279,10 @@ class Sms
     }
 
     /**
-     * @param array $rates
-     * @return string
-     */
-    private static function getRandType(array $rates): string
-    {
-        try {
-            $result = self::SCOPE_LOCAL;
-            if (!$rates) {
-                return $result;
-            }
-            if (count($rates) === 1) {
-                return (string) array_key_first($rates);
-            }
-            //概率数组的总概率精度
-            $sumRates = array_sum($rates);
-            //概率数组循环
-            foreach ($rates as $key => $rate) {
-                $randNum = random_int(1, $sumRates);
-                if ($randNum <= $rate) {
-                    $result = $key;
-                    break;
-                }
-                $sumRates -= $rate;
-            }
-
-            return (string) $result;
-        } catch (Throwable $e) {
-            return $result;
-        }
-    }
-
-    /**
      * 保存模板
      * @return bool
      * @throws SettingKeyNotMatchException
-     * @throws SettingValueOutOfRangeException
+     * @throws SettingValueOutOfRangeException|JsonException
      */
     private function save(): bool
     {

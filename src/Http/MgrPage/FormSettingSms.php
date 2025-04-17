@@ -4,13 +4,21 @@ declare(strict_types = 1);
 
 namespace Weiran\Sms\Http\MgrPage;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
+use JsonException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Weiran\Core\Classes\Contracts\SettingContract;
 use Weiran\Framework\Classes\Resp;
 use Weiran\Framework\Validation\Rule;
 use Weiran\MgrPage\Classes\Form\Field\Number;
 use Weiran\MgrPage\Classes\Form\FormSettingBase;
+use Weiran\System\Exceptions\SettingKeyNotMatchException;
+use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 use Weiran\System\Setting\Repository\SettingRepository;
 
 class FormSettingSms extends FormSettingBase
@@ -19,7 +27,12 @@ class FormSettingSms extends FormSettingBase
 
     protected $withContent = true;
 
-    public function handle(Request $request)
+    /**
+     * @throws SettingValueOutOfRangeException
+     * @throws SettingKeyNotMatchException
+     * @throws JsonException
+     */
+    public function handle(Request $request): Response|JsonResponse|RedirectResponse
     {
         $items = $request->all();
         /** @var SettingRepository $Setting */
@@ -36,6 +49,13 @@ class FormSettingSms extends FormSettingBase
         return parent::handle($request);
     }
 
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws SettingValueOutOfRangeException
+     * @throws SettingKeyNotMatchException
+     * @throws JsonException
+     */
     public function form(): void
     {
         $sendTypes = sys_hook('weiran.sms.send_type');

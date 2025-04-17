@@ -4,14 +4,37 @@ declare(strict_types = 1);
 
 namespace Weiran\Sms\Classes;
 
+use JsonException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Volc\Service\Sms as VolcSms;
 use Weiran\Sms\Action\Sms;
 use Weiran\Sms\Classes\Contracts\SmsContract;
 use Weiran\Sms\Exceptions\SmsException;
 use Weiran\System\Classes\Logger\Logging;
-use Volc\Service\Sms as VolcSms;
+use Weiran\System\Exceptions\SettingKeyNotMatchException;
+use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
 class VolcSmsProvider extends BaseSms implements SmsContract
 {
+
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws SettingKeyNotMatchException
+     * @throws JsonException
+     * @throws SettingValueOutOfRangeException
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        config([
+            'weiran.sms.volc.access_key'      => sys_setting('weiran-sms::sms.volc_access_key'),
+            'weiran.sms.volc.access_secret'   => sys_setting('weiran-sms::sms.volc_access_secret'),
+            'weiran.sms.volc.default_account' => sys_setting('weiran-sms::sms.volc_default_account'),
+        ]);
+    }
+
     /**
      * @inheritDoc
      */
@@ -117,6 +140,11 @@ class VolcSmsProvider extends BaseSms implements SmsContract
         }
     }
 
+    protected function logger()
+    {
+        return Logging::logger('Sms');
+    }
+
     /**
      * 初始化
      * @throws SmsException
@@ -135,10 +163,5 @@ class VolcSmsProvider extends BaseSms implements SmsContract
         }
 
         return $client;
-    }
-
-    protected function logger()
-    {
-        return Logging::logger('Sms');
     }
 }

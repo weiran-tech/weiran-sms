@@ -75,42 +75,5 @@ class ServiceProvider extends WeiranServiceProvider
         config([
             'weiran.sms.sign' => sys_setting('weiran-sms::sms.sign'),
         ]);
-        $sendTypes = array_keys(sys_hook('weiran.sms.send_type'));
-        foreach ($sendTypes as $sendType) {
-            $rate = (int) sys_setting('weiran-sms::sms.send_rate_' . $sendType);
-            if ($rate) {
-                if ($sendType === Sms::SCOPE_ALIYUN) {
-                    config([
-                        'weiran.sms.aliyun.access_key'    => sys_setting('weiran-sms::sms.aliyun_access_key'),
-                        'weiran.sms.aliyun.access_secret' => sys_setting('weiran-sms::sms.aliyun_access_secret'),
-                    ]);
-                }
-                if ($sendType === Sms::SCOPE_CHUANGLAN) {
-                    config([
-                        'weiran.sms.chuanglan.access_key'        => sys_setting('weiran-sms::sms.chuanglan_access_key'),
-                        'weiran.sms.chuanglan.access_secret'     => sys_setting('weiran-sms::sms.chuanglan_access_secret'),
-                        'weiran.sms.chuanglan.cty_access_key'    => sys_setting('weiran-sms::sms.chuanglan_cty_access_key'),
-                        'weiran.sms.chuanglan.cty_access_secret' => sys_setting('weiran-sms::sms.chuanglan_cty_access_secret'),
-                    ]);
-                }
-                if ($sendType === Sms::SCOPE_LIANLU) {
-                    config([
-                        'weiran.sms.lianlu.mch_id'      => sys_setting('weiran-sms::sms.lianlu_mch_id'),
-                        'weiran.sms.lianlu.app_id'      => sys_setting('weiran-sms::sms.lianlu_app_id'),
-                        'weiran.sms.lianlu.app_key'     => sys_setting('weiran-sms::sms.lianlu_app_key'),
-                        'weiran.sms.lianlu.cty_mch_id'  => sys_setting('weiran-sms::sms.lianlu_cty_mch_id'),
-                        'weiran.sms.lianlu.cty_app_id'  => sys_setting('weiran-sms::sms.chuanglan_cty_app_id'),
-                        'weiran.sms.lianlu.cty_app_key' => sys_setting('weiran-sms::sms.chuanglan_cty_app_key'),
-                    ]);
-                }
-                if ($sendType === Sms::SCOPE_VOLC) {
-                    config([
-                        'weiran.sms.volc.access_key'      => sys_setting('weiran-sms::sms.volc_access_key'),
-                        'weiran.sms.volc.access_secret'   => sys_setting('weiran-sms::sms.volc_access_secret'),
-                        'weiran.sms.volc.default_account' => sys_setting('weiran-sms::sms.volc_default_account'),
-                    ]);
-                }
-            }
-        }
     }
 }

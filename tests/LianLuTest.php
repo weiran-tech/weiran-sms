@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Weiran\Sms\Tests;
 
+use JsonException;
 use Weiran\Sms\Action\Sms;
 use Weiran\Sms\Classes\LianLuSmsProvider;
 use Weiran\System\Exceptions\SettingKeyNotMatchException;
@@ -20,7 +21,7 @@ class LianLuTest extends BaseSms
         parent::setUp();
         // config
         config([
-            'weiran.sms.sign'           => (string) data_get($this->conf, 'lianlu_sign'),
+            'weiran.sms.sign'           => (string) data_get($this->conf, 'sign'),
             'weiran.sms.lianlu.mch_id'  => data_get($this->conf, 'lianlu_mch_id'),
             'weiran.sms.lianlu.app_id'  => data_get($this->conf, 'lianlu_app_id'),
             'weiran.sms.lianlu.app_key' => data_get($this->conf, 'lianlu_app_key'),
@@ -31,7 +32,7 @@ class LianLuTest extends BaseSms
      * 发送普通短信
      * @return void
      * @throws SettingKeyNotMatchException
-     * @throws SettingValueOutOfRangeException
+     * @throws SettingValueOutOfRangeException|JsonException
      */
     public function testSendSms(): void
     {

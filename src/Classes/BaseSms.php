@@ -4,8 +4,13 @@ declare(strict_types = 1);
 
 namespace Weiran\Sms\Classes;
 
+use JsonException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Weiran\Framework\Classes\Traits\AppTrait;
 use Weiran\Sms\Action\Sms;
+use Weiran\System\Exceptions\SettingKeyNotMatchException;
+use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
 abstract class BaseSms
 {
@@ -28,6 +33,31 @@ abstract class BaseSms
     protected string $scope = Sms::SCOPE_LOCAL;
 
     /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws SettingValueOutOfRangeException
+     * @throws SettingKeyNotMatchException
+     * @throws JsonException
+     */
+    public function __construct()
+    {
+        config([
+            'weiran.sms.sign' => sys_setting('weiran-sms::sms.sign'),
+        ]);
+    }
+
+    /**
+     * 设置配置
+     * @param array $config
+     * @return $this
+     */
+    public function setConfig(array $config): self
+    {
+        config($config);
+        return $this;
+    }
+
+    /**
      * @param string $scope
      */
     public function setScope(string $scope): void
@@ -38,11 +68,11 @@ abstract class BaseSms
     /**
      * 检查短信是否为空
      * @param string|array $mobile 手机号
-     * @param string       $type   类型
-     * @param string       $sign   签名
+     * @param string       $type 类型
+     * @param string       $sign 签名
      * @return bool
      */
-    public function checkSms($mobile, string $type, string $sign): bool
+    public function checkSms(mixed $mobile, string $type, string $sign): bool
     {
         if (!$mobile) {
             return $this->setError('手机号缺失, 不进行发送!');

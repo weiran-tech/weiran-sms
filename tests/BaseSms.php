@@ -14,9 +14,9 @@ abstract class BaseSms extends TestCase
 
     /**
      * 手机
-     * @var array|mixed
+     * @var array|string
      */
-    protected $mobile;
+    protected mixed $mobile;
 
     /**
      * 配置文件
@@ -27,7 +27,7 @@ abstract class BaseSms extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->conf   = $this->readJson('weiran.sms', 'tests/config/account.json');
+        $this->conf   = $this->readJson('weiran.sms', 'tests/config/test.json');
         $this->mobile = data_get($this->conf, 'mobile');
     }
 }

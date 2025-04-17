@@ -5,7 +5,12 @@ declare(strict_types = 1);
 namespace Weiran\Sms\Tests;
 
 use Illuminate\Support\Str;
+use JsonException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Weiran\Sms\Classes\Contracts\SmsContract;
+use Weiran\System\Exceptions\SettingKeyNotMatchException;
+use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
 /**
  * 发送短信
@@ -15,6 +20,14 @@ class NormalTest extends BaseSms
 
     /**
      * 测试短信发送
+     */
+    /**
+     * @return void
+     * @throws JsonException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws SettingKeyNotMatchException
+     * @throws SettingValueOutOfRangeException
      */
     public function testCaptcha(): void
     {

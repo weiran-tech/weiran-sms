@@ -7,12 +7,33 @@ namespace Weiran\Sms\Classes;
 use AlibabaCloud\SDK\Dysmsapi\V20170525\Dysmsapi;
 use AlibabaCloud\SDK\Dysmsapi\V20170525\Models\SendSmsRequest;
 use Darabonba\OpenApi\Models\Config;
+use JsonException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Weiran\Sms\Action\Sms;
 use Weiran\Sms\Classes\Contracts\SmsContract;
 use Weiran\Sms\Exceptions\SmsException;
+use Weiran\System\Exceptions\SettingKeyNotMatchException;
+use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
 class AliyunSmsProvider extends BaseSms implements SmsContract
 {
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws SettingKeyNotMatchException
+     * @throws JsonException
+     * @throws SettingValueOutOfRangeException
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        config([
+            'weiran.sms.aliyun.access_key'    => sys_setting('weiran-sms::sms.aliyun_access_key'),
+            'weiran.sms.aliyun.access_secret' => sys_setting('weiran-sms::sms.aliyun_access_secret'),
+        ]);
+    }
+
     /**
      * @inheritDoc
      */

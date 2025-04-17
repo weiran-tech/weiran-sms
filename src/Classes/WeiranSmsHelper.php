@@ -16,7 +16,7 @@ class WeiranSmsHelper
      * @param array|string $mobile
      * @return string
      */
-    public static function transToAliyunMobile($mobile): string
+    public static function transToAliyunMobile(mixed $mobile): string
     {
         return array_reduce((array) $mobile, function ($carry, $mobile) {
             $mobile = str_replace('-', '', $mobile);

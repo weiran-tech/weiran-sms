@@ -4,10 +4,15 @@ declare(strict_types = 1);
 
 namespace Weiran\Sms\Classes;
 
+use JsonException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Weiran\Framework\Helper\UtilHelper;
 use Weiran\Sms\Action\Sms;
 use Weiran\Sms\Classes\Contracts\SmsContract;
 use Weiran\Sms\Classes\LianLu\SmsApi;
+use Weiran\System\Exceptions\SettingKeyNotMatchException;
+use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
 class LianLuSmsProvider extends BaseSms implements SmsContract
 {
@@ -15,6 +20,26 @@ class LianLuSmsProvider extends BaseSms implements SmsContract
      * @var SmsApi
      */
     private SmsApi $llApi;
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws SettingKeyNotMatchException
+     * @throws SettingValueOutOfRangeException
+     * @throws NotFoundExceptionInterface
+     * @throws JsonException
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        config([
+            'weiran.sms.lianlu.mch_id'      => sys_setting('weiran-sms::sms.lianlu_mch_id'),
+            'weiran.sms.lianlu.app_id'      => sys_setting('weiran-sms::sms.lianlu_app_id'),
+            'weiran.sms.lianlu.app_key'     => sys_setting('weiran-sms::sms.lianlu_app_key'),
+            'weiran.sms.lianlu.cty_mch_id'  => sys_setting('weiran-sms::sms.lianlu_cty_mch_id'),
+            'weiran.sms.lianlu.cty_app_id'  => sys_setting('weiran-sms::sms.chuanglan_cty_app_id'),
+            'weiran.sms.lianlu.cty_app_key' => sys_setting('weiran-sms::sms.chuanglan_cty_app_key'),
+        ]);
+    }
 
     /**
      * @inheritDoc
