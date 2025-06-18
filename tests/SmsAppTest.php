@@ -13,15 +13,14 @@ use Weiran\System\Exceptions\SettingKeyNotMatchException;
 use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
 /**
+ * 测试封装的内容可以调用
  * 发送短信
  */
-class NormalTest extends BaseSms
+class SmsAppTest extends BaseSms
 {
 
     /**
      * 测试短信发送
-     */
-    /**
      * @return void
      * @throws JsonException
      * @throws ContainerExceptionInterface

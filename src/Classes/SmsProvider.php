@@ -15,6 +15,13 @@ class SmsProvider extends BaseSms implements SmsContract
 {
     protected string $driver = '';
 
+    public function __construct()
+    {
+        parent::__construct();
+        config([
+            'weiran.sms.sign' => sys_setting('weiran-sms::sms.sign'),
+        ]);
+    }
 
     public function setDriver($driver): self
     {

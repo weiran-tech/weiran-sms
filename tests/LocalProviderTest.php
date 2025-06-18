@@ -10,7 +10,7 @@ use Weiran\Sms\Classes\LocalSmsProvider;
 /**
  * 发送短信
  */
-class LocalTest extends BaseSms
+class LocalProviderTest extends BaseSms
 {
 
     /**

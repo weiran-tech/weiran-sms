@@ -41,6 +41,7 @@ class ChuanglanSmsProvider extends BaseSms implements SmsContract
 
     /**
      * @inheritDoc
+     * @throws JsonException
      */
     public function send(string $type, $mobile, array $params = [], $sign = ''): bool
     {
@@ -58,7 +59,7 @@ class ChuanglanSmsProvider extends BaseSms implements SmsContract
             ? $this->clApi->sendSms($mobile, $msg)
             : $this->clApi->sendCtySMS($mobile, $msg);
         if (!is_null($result)) {
-            $output = json_decode($result, true);
+            $output = json_decode($result, true, 512, JSON_THROW_ON_ERROR);
             if (isset($output['code']) && $output['code'] === '0') {
                 return true;
             }
@@ -71,11 +72,11 @@ class ChuanglanSmsProvider extends BaseSms implements SmsContract
 
     /**
      * 初始化配置
-     * @param string $mobiles
+     * @param string $mobile
      */
-    private function initConfig($mobiles): void
+    private function initConfig(string $mobile): void
     {
-        if (!UtilHelper::isChMobile($mobiles)) {
+        if (!UtilHelper::isChMobile($mobile)) {
             $apiAccount  = config('weiran.sms.chuanglan.cty_access_key');
             $apiPassword = config('weiran.sms.chuanglan.cty_access_secret');
         }

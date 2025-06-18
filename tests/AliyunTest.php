@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Weiran\Sms\Tests;
 
 use Illuminate\Support\Str;
+use JsonException;
 use Weiran\Sms\Action\Sms;
 use Weiran\Sms\Classes\AliyunSmsProvider;
 use Weiran\Sms\Classes\WeiranSmsHelper;
@@ -16,18 +17,6 @@ use Weiran\System\Exceptions\SettingValueOutOfRangeException;
  */
 class AliyunTest extends BaseSms
 {
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        // config
-        config([
-            'weiran.sms.aliyun.access_key'    => data_get($this->conf, 'aliyun_access_key'),
-            'weiran.sms.aliyun.access_secret' => data_get($this->conf, 'aliyun_access_secret'),
-        ]);
-    }
-
 
     public function testTransMobile(): void
     {
@@ -53,15 +42,15 @@ class AliyunTest extends BaseSms
      * @return void
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException
+     * @throws JsonException
      */
     public function testCaptcha(): void
     {
         $Sms = new Sms();
-        $Sms->establish('aliyun:captcha', data_get($this->conf, 'aliyun_captcha_code'));
-
+        $Sms->establish('aliyun:no_params', data_get($this->conf, 'aliyun.no_params'));
 
         $Provider = new AliyunSmsProvider();
-        if ($Provider->send('captcha', $this->mobile, [
+        if ($Provider->send('no_params', $this->mobile, [
             'code' => 'Test_' . Str::random(4),
         ])) {
             $this->assertTrue(true);
@@ -69,5 +58,16 @@ class AliyunTest extends BaseSms
         else {
             $this->fail($Provider->getError()->getMessage());
         }
+    }
+
+    public function aliyun(): AliyunSmsProvider
+    {
+        $Sms = new AliyunSmsProvider();
+        // config
+        config([
+            'weiran.sms.aliyun.access_key'    => data_get($this->conf, 'aliyun.access_key'),
+            'weiran.sms.aliyun.access_secret' => data_get($this->conf, 'aliyun.access_secret'),
+        ]);
+        return $Sms;
     }
 }

@@ -1,13 +1,21 @@
 {
-    "aliyun_access_key": "",
-    "aliyun_access_secret": "",
-    "chuanglan_access_key": "",
-    "chuanglan_access_secret": "",
-    "chuanglan_sign": "",
-    "lianlu_sign": "",
-    "lianlu_mch_id": "",
-    "lianlu_app_id": "",
-    "lianlu_app_key": "",
-    "lianlu_cash_over_code": "",
-    "mobile": ""
+    "mobile": "15555555555",
+    "sign": "签名",
+    "aliyun": {
+        "access_key": "",
+        "access_secret": "",
+        "no_params": ""
+    },
+    "chuanglan": {
+        "access_key": "",
+        "access_secret": "",
+        "no_params": ""
+    },
+    "lianlu": {
+        "mch_id": "",
+        "app_id": "",
+        "app_key": "",
+        "no_params": "",
+        "with_params": ""
+    }
 }
