@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "weiran/system": "1.0.x-dev"
+        "weiran/system": "1.0.*"
     },
     "autoload": {
         "psr-4": {
