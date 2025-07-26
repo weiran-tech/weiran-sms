@@ -58,21 +58,13 @@ abstract class BaseSms
     }
 
     /**
-     * @param string $scope
-     */
-    public function setScope(string $scope): void
-    {
-        $this->scope = $scope;
-    }
-
-    /**
      * 检查短信是否为空
      * @param string|array $mobile 手机号
      * @param string       $type 类型
      * @param string       $sign 签名
      * @return bool
      */
-    public function checkSms(mixed $mobile, string $type, string $sign): bool
+    protected function checkSms(mixed $mobile, string $type, string $sign): bool
     {
         if (!$mobile) {
             return $this->setError('手机号缺失, 不进行发送!');
@@ -97,5 +89,13 @@ abstract class BaseSms
         }
 
         return true;
+    }
+
+    /**
+     * @param string $scope
+     */
+    protected function setScope(string $scope): void
+    {
+        $this->scope = $scope;
     }
 }

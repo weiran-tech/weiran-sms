@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Weiran\Sms\Tests;
 
-use Illuminate\Support\Str;
 use JsonException;
+use Random\RandomException;
 use Weiran\Sms\Action\Sms;
 use Weiran\Sms\Classes\AliyunSmsProvider;
 use Weiran\Sms\Classes\WeiranSmsHelper;
@@ -43,15 +43,18 @@ class AliyunTest extends BaseSms
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException
      * @throws JsonException
+     * @throws RandomException
      */
     public function testCaptcha(): void
     {
         $Sms = new Sms();
-        $Sms->establish('aliyun:no_params', data_get($this->conf, 'aliyun.no_params'));
+        if (!$Sms->establish('aliyun:captcha', data_get($this->conf, 'aliyun.with_params'))) {
+            $this->fail($Sms->getError()->getMessage());
+        }
 
-        $Provider = new AliyunSmsProvider();
-        if ($Provider->send('no_params', $this->mobile, [
-            'code' => 'Test_' . Str::random(4),
+        $Provider = $this->aliyun();
+        if ($Provider->send('captcha', $this->mobile, [
+            'code' => random_int(1111, 9999)
         ])) {
             $this->assertTrue(true);
         }

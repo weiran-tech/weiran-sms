@@ -32,17 +32,15 @@ class LianLuSmsProvider extends BaseSms implements SmsContract
     {
         parent::__construct();
         config([
-            'weiran.sms.lianlu.mch_id'      => sys_setting('weiran-sms::sms.lianlu_mch_id'),
-            'weiran.sms.lianlu.app_id'      => sys_setting('weiran-sms::sms.lianlu_app_id'),
-            'weiran.sms.lianlu.app_key'     => sys_setting('weiran-sms::sms.lianlu_app_key'),
-            'weiran.sms.lianlu.cty_mch_id'  => sys_setting('weiran-sms::sms.lianlu_cty_mch_id'),
-            'weiran.sms.lianlu.cty_app_id'  => sys_setting('weiran-sms::sms.chuanglan_cty_app_id'),
-            'weiran.sms.lianlu.cty_app_key' => sys_setting('weiran-sms::sms.chuanglan_cty_app_key'),
+            'weiran.sms.lianlu.mch_id'  => sys_setting('weiran-sms::sms.lianlu_mch_id'),
+            'weiran.sms.lianlu.app_id'  => sys_setting('weiran-sms::sms.lianlu_app_id'),
+            'weiran.sms.lianlu.app_key' => sys_setting('weiran-sms::sms.lianlu_app_key'),
         ]);
     }
 
     /**
      * @inheritDoc
+     * @throws JsonException
      */
     public function send(string $type, $mobile, array $params = [], $sign = ''): bool
     {
@@ -51,7 +49,7 @@ class LianLuSmsProvider extends BaseSms implements SmsContract
             return false;
         }
 
-        $this->initConfig($mobile);
+        $this->initConfig();
 
         $templateId     = $this->sms['code'] ?? '';
         $templateParams = array_values($params);
@@ -63,7 +61,7 @@ class LianLuSmsProvider extends BaseSms implements SmsContract
         }
         $result = $this->llApi->sendTemplateSMS($mobile, $templateId, $templateParams);
         if (!is_null($result)) {
-            $output = json_decode($result, true);
+            $output = json_decode($result, true, 512, JSON_THROW_ON_ERROR);
             if (isset($output['status']) && $output['status'] === '00') {
                 return true;
             }
@@ -76,20 +74,12 @@ class LianLuSmsProvider extends BaseSms implements SmsContract
 
     /**
      * 初始化配置
-     * @param string $mobiles
      */
-    private function initConfig($mobiles): void
+    private function initConfig(): void
     {
-        if (!UtilHelper::isChMobile($mobiles)) {
-            $mchId  = config('weiran.sms.lianlu.cty_mch_id');
-            $appId  = config('weiran.sms.lianlu.cty_app_id');
-            $appKey = config('weiran.sms.lianlu.cty_app_key');
-        }
-        else {
-            $mchId  = config('weiran.sms.lianlu.mch_id');
-            $appId  = config('weiran.sms.lianlu.app_id');
-            $appKey = config('weiran.sms.lianlu.app_key');
-        }
+        $mchId       = config('weiran.sms.lianlu.mch_id');
+        $appId       = config('weiran.sms.lianlu.app_id');
+        $appKey      = config('weiran.sms.lianlu.app_key');
         $this->llApi = new SmsApi($mchId, $appId, $appKey, $this->sign);
     }
 }

@@ -32,14 +32,15 @@ class AliyunSmsProvider extends BaseSms implements SmsContract
             'weiran.sms.aliyun.access_key'    => sys_setting('weiran-sms::sms.aliyun_access_key'),
             'weiran.sms.aliyun.access_secret' => sys_setting('weiran-sms::sms.aliyun_access_secret'),
         ]);
+        $this->setScope(Sms::SCOPE_ALIYUN);
     }
 
     /**
      * @inheritDoc
+     * @throws JsonException
      */
     public function send(string $type, $mobile, array $params = [], $sign = ''): bool
     {
-        $this->setScope(Sms::SCOPE_ALIYUN);
         if (!$this->checkSms($mobile, $type, $sign)) {
             return false;
         }
@@ -62,7 +63,7 @@ class AliyunSmsProvider extends BaseSms implements SmsContract
             $request->signName     = $this->sign;
             $request->templateCode = $this->sms['code'];
             if ($params) {
-                $request->templateParam = json_encode($params, JSON_UNESCAPED_UNICODE);
+                $request->templateParam = json_encode($params, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
             }
             $resp = $client->sendSms($request);
 
