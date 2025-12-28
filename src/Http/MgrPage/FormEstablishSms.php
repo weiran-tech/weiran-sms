@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Route;
 use Weiran\Framework\Classes\Resp;
 use Weiran\Framework\Exceptions\HintException;
 use Weiran\MgrPage\Classes\Widgets\FormWidget;
@@ -17,23 +18,18 @@ use Weiran\Sms\Action\Sms;
 use Weiran\Sms\Http\Validation\SmsEstablishRequest;
 use Weiran\System\Exceptions\SettingKeyNotMatchException;
 use Weiran\System\Exceptions\SettingValueOutOfRangeException;
-use Route;
 
 class FormEstablishSms extends FormWidget
 {
-
     private Sms $sms;
 
     /**
      * ID
-     * @var string
      */
     private string $id = '';
 
-
     /**
      * 范围
-     * @var string
      */
     private string $scope = '';
 
@@ -57,8 +53,8 @@ class FormEstablishSms extends FormWidget
     }
 
     /**
-     * @param Request $request
      * @return JsonResponse|RedirectResponse|Response
+     *
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException
      * @throws AuthorizationException
@@ -68,7 +64,7 @@ class FormEstablishSms extends FormWidget
     {
         if ($this->id) {
             $request->merge([
-                'scope' => $this->scope
+                'scope' => $this->scope,
             ]);
         }
 
@@ -77,8 +73,9 @@ class FormEstablishSms extends FormWidget
         if (!$this->sms->establish($this->id ?: $id, $data['code'])) {
             return Resp::error($this->sms->getError());
         }
+
         return Resp::success('操作成功', [
-            '_parent_reload' => 1
+            '_parent_reload' => 1,
         ]);
     }
 

@@ -12,10 +12,9 @@ use Weiran\Sms\Http\RouteServiceProvider;
 
 class ServiceProvider extends WeiranServiceProvider
 {
-
     /**
      * Bootstrap the application events.
-     * @return void
+     *
      * @throws ModuleNotFoundException
      */
     public function boot(): void
@@ -25,7 +24,6 @@ class ServiceProvider extends WeiranServiceProvider
 
     /**
      * Register the service provider.
-     * @return void
      */
     public function register(): void
     {
@@ -35,7 +33,7 @@ class ServiceProvider extends WeiranServiceProvider
         $this->mergeConfigFrom(dirname(__DIR__) . '/resources/config/sms.php', 'weiran.sms');
 
         $this->app->bind('weiran.sms', function () {
-            return new SmsProvider;
+            return new SmsProvider();
         });
 
         $this->app->alias('weiran.sms', SmsContract::class);
@@ -43,7 +41,6 @@ class ServiceProvider extends WeiranServiceProvider
 
     /**
      * Get the services provided by the provider.
-     * @return array
      */
     public function provides(): array
     {

@@ -13,7 +13,6 @@ use Weiran\Sms\Http\MgrPage\FormSettingVolc;
  */
 class SendTypeVolc implements ServiceArray
 {
-
     public function key(): string
     {
         return 'volc';

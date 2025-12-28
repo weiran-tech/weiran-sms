@@ -12,7 +12,6 @@ use Weiran\Sms\Classes\LocalSmsProvider;
  */
 class LocalProviderTest extends BaseSms
 {
-
     /**
      * 测试短信发送
      */

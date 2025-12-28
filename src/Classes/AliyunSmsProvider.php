@@ -36,7 +36,8 @@ class AliyunSmsProvider extends BaseSms implements SmsContract
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
      * @throws JsonException
      */
     public function send(string $type, $mobile, array $params = [], $sign = ''): bool
@@ -48,6 +49,7 @@ class AliyunSmsProvider extends BaseSms implements SmsContract
         // 支持数组/字串/多字串
         $mobile = array_reduce((array) $mobile, function ($carry, $mobile) {
             $mobile = str_replace('-', '', $mobile);
+
             return $carry ? $carry . ',' . $mobile : $mobile;
         }, '');
 
@@ -57,7 +59,6 @@ class AliyunSmsProvider extends BaseSms implements SmsContract
             /**
              * @url https://help.aliyun.com/document_detail/101414.htm
              */
-
             $request               = new SendSmsRequest();
             $request->phoneNumbers = $mobile;
             $request->signName     = $this->sign;
@@ -76,18 +77,20 @@ class AliyunSmsProvider extends BaseSms implements SmsContract
              *    "Code":"OK"
              * }
              */
-
             if ($resp->body->code === 'OK') {
                 return true;
             }
+
             return $this->setError('Aliyun:' . $resp->body->message);
-        } catch (SmsException $e) {
+        }
+        catch (SmsException $e) {
             return $this->setError($e->getMessage());
         }
     }
 
     /**
      * 初始化
+     *
      * @throws SmsException
      */
     private function initClient(): Dysmsapi
@@ -100,9 +103,10 @@ class AliyunSmsProvider extends BaseSms implements SmsContract
 
         $config           = new Config([
             'accessKeyId'     => $accessKeyId,
-            'accessKeySecret' => $accessKeySecret
+            'accessKeySecret' => $accessKeySecret,
         ]);
         $config->endpoint = 'dysmsapi.aliyuncs.com';
+
         return new Dysmsapi($config);
     }
 }

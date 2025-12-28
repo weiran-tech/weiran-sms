@@ -18,6 +18,7 @@ class ChuanglanProviderTest extends BaseSms
 {
     /**
      * 测试短信发送
+     *
      * @throws JsonException
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException
@@ -27,7 +28,6 @@ class ChuanglanProviderTest extends BaseSms
 
         $Sms = new Sms();
         $Sms->establish('chuanglan:no_params', data_get($this->conf, 'chuanglan.no_params'));
-
 
         $chuanglan = $this->chuanglan();
         if ($chuanglan->send('no_params', $this->mobile, [
@@ -49,6 +49,7 @@ class ChuanglanProviderTest extends BaseSms
             'weiran.sms.chuanglan.cty_access_key'    => data_get($this->conf, 'chuanglan.cty_access_key'),
             'weiran.sms.chuanglan.cty_access_secret' => data_get($this->conf, 'chuanglan.cty_access_secret'),
         ]);
+
         return $Sms;
     }
 }

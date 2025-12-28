@@ -23,23 +23,19 @@ use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 class Sms
 {
     use AppTrait, SystemTrait;
-
     public const SCOPE_LOCAL     = 'local';
     public const SCOPE_ALIYUN    = 'aliyun';
     public const SCOPE_CHUANGLAN = 'chuanglan';
     public const SCOPE_LIANLU    = 'lianlu';
     public const SCOPE_VOLC      = 'volc';
 
-
     /**
      * 所有的模版
-     * @var Collection
      */
     private Collection $templates;
 
     /**
      * 项目条目
-     * @var array
      */
     private array $item;
 
@@ -57,33 +53,35 @@ class Sms
 
     /**
      * 短信类型
+     *
      * @param string|null $key key
-     * @return array|string
      */
-    public static function kvType(string $key = null): array|string
+    public static function kvType(?string $key = null): array|string
     {
         $desc = collect(config('weiran.sms.types') ?: [])->pluck('title', 'type')->toArray();
+
         return kv($desc, $key);
     }
 
     /**
      * 平台类型
-     * @param null|string $key
-     * @return array|string
      */
-    public static function kvPlatform(string $key = null): array|string
+    public static function kvPlatform(?string $key = null): array|string
     {
         $sendTypes     = sys_hook('weiran.sms.send_type');
         $desc['local'] = '本地';
         foreach ($sendTypes as $k => $d) {
             $desc[$k] = $d['title'];
         }
+
         return kv($desc, $key);
     }
 
     /**
      * 获取指定平台对应类型的模板
+     *
      * @param string $type 类型
+     *
      * @return array [type|code|content]
      */
     public static function smsTpl(string $type, string $scope): array
@@ -93,12 +91,13 @@ class Sms
         if ($templates->offsetExists($key)) {
             return $templates->offsetGet($key);
         }
+
         return [];
     }
 
     /**
      * 获取现在配置分流的短信
-     * @return string
+     *
      * @throws ContainerExceptionInterface
      * @throws JsonException
      * @throws NotFoundExceptionInterface
@@ -125,15 +124,13 @@ class Sms
      * 1. 获取所有的平台
      * 2. 过滤存在该模板的平台
      * 3. 再次进行过滤
-     * @param string $type
-     * @return string
+     *
      * @throws ContainerExceptionInterface
      * @throws JsonException
      * @throws NotFoundExceptionInterface
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException
      */
-
     public static function rateSmsDriverByType(string $type): string
     {
         // 获取所有的模板
@@ -149,13 +146,13 @@ class Sms
                 $types[] = $hook;
             }
         }
+
         return self::rateSmsDriver($types);
     }
 
     /**
      * 抽取公共方法
-     * @param array $sendTypes
-     * @return string
+     *
      * @throws ContainerExceptionInterface
      * @throws JsonException
      * @throws NotFoundExceptionInterface
@@ -175,10 +172,6 @@ class Sms
         return self::getRandType($rates);
     }
 
-    /**
-     * @param array $rates
-     * @return string
-     */
     private static function getRandType(array $rates): string
     {
         try {
@@ -189,9 +182,9 @@ class Sms
             if (count($rates) === 1) {
                 return (string) array_key_first($rates);
             }
-            //概率数组的总概率精度
+            // 概率数组的总概率精度
             $sumRates = array_sum($rates);
-            //概率数组循环
+            // 概率数组循环
             foreach ($rates as $key => $rate) {
                 $randNum = random_int(1, $sumRates);
                 if ($randNum <= $rate) {
@@ -202,23 +195,20 @@ class Sms
             }
 
             return (string) $result;
-        } catch (Throwable) {
+        }
+        catch (Throwable) {
             return $result;
         }
     }
 
     /**
      * 获取所有的模版
-     * @return Collection
      */
     public function getTemplates(): Collection
     {
         return $this->templates;
     }
 
-    /**
-     * @return array
-     */
     public function getItem(): array
     {
         return $this->item;
@@ -226,9 +216,7 @@ class Sms
 
     /**
      * 新增和编辑
-     * @param string $id
-     * @param string $code
-     * @return bool
+     *
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException|JsonException
      */
@@ -240,13 +228,15 @@ class Sms
             'type'  => $type,
             'code'  => $code,
         ]);
+
         return $this->save();
     }
 
     /**
      * 初始化
+     *
      * @param string $id ID
-     * @return bool
+     *
      * @throws HintException
      */
     public function init(string $id): bool
@@ -257,6 +247,7 @@ class Sms
         $items = collect($this->templates);
         if ($items->offsetExists($id)) {
             $this->item = $items->offsetGet($id);
+
             return true;
         }
         throw new HintException('短信ID不存在');
@@ -264,8 +255,9 @@ class Sms
 
     /**
      * 刪除
+     *
      * @param string $id id
-     * @return bool
+     *
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException|JsonException
      */
@@ -280,13 +272,14 @@ class Sms
 
     /**
      * 保存模板
-     * @return bool
+     *
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException|JsonException
      */
     private function save(): bool
     {
         $this->sysSetting()->set(WeiranSmsDef::ckTemplate(), $this->templates->toArray());
+
         return true;
     }
 }

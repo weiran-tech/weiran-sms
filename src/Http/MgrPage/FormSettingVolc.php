@@ -9,7 +9,6 @@ use Weiran\MgrPage\Classes\Form\FormSettingBase;
 
 class FormSettingVolc extends FormSettingBase
 {
-
     protected string $title = '火山云短信配置';
 
     protected $withContent = true;

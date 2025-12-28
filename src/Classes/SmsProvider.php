@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types = 1);
 
 namespace Weiran\Sms\Classes;
@@ -26,13 +27,13 @@ class SmsProvider extends BaseSms implements SmsContract
     public function setDriver($driver): self
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
      * 通过短信类型获取 Driver
-     * @param string $type
-     * @return SmsContract
+     *
      * @throws JsonException
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
@@ -56,11 +57,7 @@ class SmsProvider extends BaseSms implements SmsContract
 
     /**
      * 发送短信
-     * @param string $type
-     * @param        $mobile
-     * @param array  $params
-     * @param string $sign
-     * @return bool
+     *
      * @throws ContainerExceptionInterface
      * @throws JsonException
      * @throws NotFoundExceptionInterface

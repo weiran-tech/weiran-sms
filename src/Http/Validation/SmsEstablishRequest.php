@@ -10,7 +10,6 @@ use Weiran\Sms\Action\Sms;
 
 class SmsEstablishRequest extends Request
 {
-
     public function rules(): array
     {
         return [
@@ -22,7 +21,7 @@ class SmsEstablishRequest extends Request
                 Rule::required(),
             ],
             'code'  => [
-                Rule::required()
+                Rule::required(),
             ],
         ];
     }

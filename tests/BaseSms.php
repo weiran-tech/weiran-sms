@@ -11,20 +11,19 @@ use Weiran\Framework\Application\TestCase;
  */
 abstract class BaseSms extends TestCase
 {
-
     /**
      * 手机
+     *
      * @var array|string
      */
     protected mixed $mobile;
 
     /**
      * 配置文件
-     * @var array
      */
     protected array $conf;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->conf   = $this->readJson('weiran.sms', 'tests/config/test.json');

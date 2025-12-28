@@ -18,10 +18,9 @@ use Weiran\System\Exceptions\SettingValueOutOfRangeException;
  */
 class SmsAppTest extends BaseSms
 {
-
     /**
      * 测试短信发送
-     * @return void
+     *
      * @throws JsonException
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
@@ -45,7 +44,7 @@ class SmsAppTest extends BaseSms
     {
         $Sms = app(SmsContract::class);
         if ($Sms->send('captcha', $this->mobile, [
-            'code' => 'Test_' . Str::random(4)
+            'code' => 'Test_' . Str::random(4),
         ])) {
             $this->assertTrue(true);
         }

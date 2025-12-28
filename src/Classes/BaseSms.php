@@ -23,13 +23,9 @@ abstract class BaseSms
 
     /**
      * 短信签名
-     * @var string
      */
     protected string $sign;
 
-    /**
-     * @var string
-     */
     protected string $scope = Sms::SCOPE_LOCAL;
 
     /**
@@ -48,21 +44,22 @@ abstract class BaseSms
 
     /**
      * 设置配置
-     * @param array $config
+     *
      * @return $this
      */
     public function setConfig(array $config): self
     {
         config($config);
+
         return $this;
     }
 
     /**
      * 检查短信是否为空
+     *
      * @param string|array $mobile 手机号
-     * @param string       $type 类型
-     * @param string       $sign 签名
-     * @return bool
+     * @param string       $type   类型
+     * @param string       $sign   签名
      */
     protected function checkSms(mixed $mobile, string $type, string $sign): bool
     {
@@ -91,9 +88,6 @@ abstract class BaseSms
         return true;
     }
 
-    /**
-     * @param string $scope
-     */
     protected function setScope(string $scope): void
     {
         $this->scope = $scope;

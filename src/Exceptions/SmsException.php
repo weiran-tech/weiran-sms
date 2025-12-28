@@ -6,7 +6,4 @@ namespace Weiran\Sms\Exceptions;
 
 use Weiran\Framework\Exceptions\BaseException;
 
-class SmsException extends BaseException
-{
-
-}
+class SmsException extends BaseException {}

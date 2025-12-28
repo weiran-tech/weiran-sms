@@ -17,7 +17,6 @@ use Weiran\Sms\Http\MgrPage\FormSettingVolc;
  */
 class StoreController extends BackendController
 {
-
     public function __construct()
     {
         parent::__construct();

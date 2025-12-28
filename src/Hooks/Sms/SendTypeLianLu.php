@@ -10,7 +10,6 @@ use Weiran\Sms\Http\MgrPage\FormSettingLianLu;
 
 class SendTypeLianLu implements ServiceArray
 {
-
     public function key(): string
     {
         return 'lianlu';

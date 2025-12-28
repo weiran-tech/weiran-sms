@@ -17,7 +17,6 @@ use Weiran\System\Exceptions\SettingValueOutOfRangeException;
  */
 class AliyunTest extends BaseSms
 {
-
     public function testTransMobile(): void
     {
         $mobiles = '15555555551';
@@ -39,7 +38,7 @@ class AliyunTest extends BaseSms
 
     /**
      * 测试短信发送
-     * @return void
+     *
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException
      * @throws JsonException
@@ -54,7 +53,7 @@ class AliyunTest extends BaseSms
 
         $Provider = $this->aliyun();
         if ($Provider->send('captcha', $this->mobile, [
-            'code' => random_int(1111, 9999)
+            'code' => random_int(1111, 9999),
         ])) {
             $this->assertTrue(true);
         }
@@ -71,6 +70,7 @@ class AliyunTest extends BaseSms
             'weiran.sms.aliyun.access_key'    => data_get($this->conf, 'aliyun.access_key'),
             'weiran.sms.aliyun.access_secret' => data_get($this->conf, 'aliyun.access_secret'),
         ]);
+
         return $Sms;
     }
 }

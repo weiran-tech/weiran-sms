@@ -9,13 +9,12 @@ use Weiran\Sms\Classes\LocalSmsProvider;
 
 class SendTypeLocal implements ServiceArray
 {
-
     public function key(): string
     {
         return 'local';
     }
 
-    public function data():array
+    public function data(): array
     {
         return [
             'title'    => '本地',

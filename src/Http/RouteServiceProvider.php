@@ -10,6 +10,7 @@ class RouteServiceProvider extends \Weiran\Framework\Application\RouteServicePro
 {
     /**
      * Define your route model bindings, pattern filters, etc.
+     *
      * @return void
      */
     public function boot()
@@ -22,7 +23,6 @@ class RouteServiceProvider extends \Weiran\Framework\Application\RouteServicePro
     /**
      * Define the "web" routes for the module.
      * These routes all receive session state, CSRF protection, etc.
-     * @return void
      */
     protected function mapBackendRoutes(): void
     {

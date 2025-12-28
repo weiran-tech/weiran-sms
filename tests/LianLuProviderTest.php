@@ -15,10 +15,9 @@ use Weiran\System\Exceptions\SettingValueOutOfRangeException;
  */
 class LianLuProviderTest extends BaseSms
 {
-
     /**
      * 发送普通短信
-     * @return void
+     *
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException|JsonException
      */
@@ -39,7 +38,7 @@ class LianLuProviderTest extends BaseSms
 
     /**
      * 发送带有参数的模板短信
-     * @return void
+     *
      * @throws JsonException
      * @throws SettingKeyNotMatchException
      * @throws SettingValueOutOfRangeException
@@ -67,6 +66,7 @@ class LianLuProviderTest extends BaseSms
             'weiran.sms.lianlu.app_id'  => data_get($this->conf, 'lianlu.app_id'),
             'weiran.sms.lianlu.app_key' => data_get($this->conf, 'lianlu.app_key'),
         ]);
+
         return $Sms;
     }
 }

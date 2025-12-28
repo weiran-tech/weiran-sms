@@ -16,9 +16,6 @@ use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
 class LianLuSmsProvider extends BaseSms implements SmsContract
 {
-    /**
-     * @var SmsApi
-     */
     private SmsApi $llApi;
 
     /**
@@ -39,7 +36,8 @@ class LianLuSmsProvider extends BaseSms implements SmsContract
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
      * @throws JsonException
      */
     public function send(string $type, $mobile, array $params = [], $sign = ''): bool

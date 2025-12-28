@@ -16,9 +16,6 @@ use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
 class ChuanglanSmsProvider extends BaseSms implements SmsContract
 {
-    /**
-     * @var SmsApi
-     */
     private SmsApi $clApi;
 
     /**
@@ -40,7 +37,8 @@ class ChuanglanSmsProvider extends BaseSms implements SmsContract
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
      * @throws JsonException
      */
     public function send(string $type, $mobile, array $params = [], $sign = ''): bool
@@ -72,7 +70,6 @@ class ChuanglanSmsProvider extends BaseSms implements SmsContract
 
     /**
      * 初始化配置
-     * @param string $mobile
      */
     private function initConfig(string $mobile): void
     {

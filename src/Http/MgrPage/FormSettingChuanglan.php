@@ -9,7 +9,6 @@ use Weiran\MgrPage\Classes\Form\FormSettingBase;
 
 class FormSettingChuanglan extends FormSettingBase
 {
-
     protected string $title = '创蓝短信配置';
 
     protected $withContent = true;
