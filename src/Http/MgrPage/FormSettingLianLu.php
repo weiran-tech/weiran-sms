@@ -11,7 +11,7 @@ class FormSettingLianLu extends FormSettingBase
 {
     protected string $title = '联麓短信配置';
 
-    protected $withContent = true;
+    protected bool $withContent = true;
 
     protected $group = 'weiran-sms::sms';
 

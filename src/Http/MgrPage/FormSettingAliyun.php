@@ -11,7 +11,7 @@ class FormSettingAliyun extends FormSettingBase
 {
     protected string $title = '阿里云短信配置';
 
-    protected $withContent = true;
+    protected bool $withContent = true;
 
     protected $group = 'weiran-sms::sms';
 

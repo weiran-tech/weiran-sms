@@ -25,7 +25,7 @@ class FormSettingSms extends FormSettingBase
 {
     protected $group = 'weiran-sms::sms';
 
-    protected $withContent = true;
+    protected bool $withContent = true;
 
     /**
      * @throws SettingValueOutOfRangeException

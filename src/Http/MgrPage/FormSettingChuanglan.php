@@ -11,7 +11,7 @@ class FormSettingChuanglan extends FormSettingBase
 {
     protected string $title = '创蓝短信配置';
 
-    protected $withContent = true;
+    protected bool $withContent = true;
 
     protected $group = 'weiran-sms::sms';
 
