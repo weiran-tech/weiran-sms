@@ -13,7 +13,7 @@ class FormSettingVolc extends FormSettingBase
 
     protected bool $withContent = true;
 
-    protected $group = 'weiran-sms::sms';
+    protected string $group = 'weiran-sms::sms';
 
     /**
      * Build a form here.

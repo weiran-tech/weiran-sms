@@ -23,7 +23,7 @@ use Weiran\System\Setting\Repository\SettingRepository;
 
 class FormSettingSms extends FormSettingBase
 {
-    protected $group = 'weiran-sms::sms';
+    protected string $group = 'weiran-sms::sms';
 
     protected bool $withContent = true;
 
