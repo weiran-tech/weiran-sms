@@ -6,7 +6,7 @@ namespace Weiran\Sms\Hooks\Sms;
 
 use Weiran\Core\Services\Contracts\ServiceArray;
 use Weiran\Sms\Classes\LianLuSmsProvider;
-use Weiran\Sms\Http\MgrPage\FormSettingLianLu;
+use Weiran\Sms\Http\Backend\Store\StoreLianLuForm;
 
 class SendTypeLianLu implements ServiceArray
 {
@@ -20,7 +20,7 @@ class SendTypeLianLu implements ServiceArray
         return [
             'title'    => '联麓',
             'provider' => LianLuSmsProvider::class,
-            'setting'  => FormSettingLianLu::class,
+            'setting'  => StoreLianLuForm::class,
             'route'    => 'weiran-sms:backend.store.lianlu',
         ];
     }

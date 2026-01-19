@@ -2,12 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Sms\Http\MgrPage;
+namespace Weiran\Sms\Http\Backend\Store;
 
 use Weiran\Framework\Validation\Rule;
 use Weiran\MgrPage\Classes\Form\FormSettingBase;
 
-class FormSettingChuanglan extends FormSettingBase
+class StoreChuanglanForm extends FormSettingBase
 {
     protected string $title = '创蓝短信配置';
 

@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Sms\Http\MgrPage;
+namespace Weiran\Sms\Http\Backend\Sms;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
@@ -15,11 +15,10 @@ use Weiran\Framework\Classes\Resp;
 use Weiran\Framework\Exceptions\HintException;
 use Weiran\MgrPage\Classes\Widgets\FormWidget;
 use Weiran\Sms\Action\Sms;
-use Weiran\Sms\Http\Validation\SmsEstablishRequest;
 use Weiran\System\Exceptions\SettingKeyNotMatchException;
 use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
-class FormEstablishSms extends FormWidget
+class SmsEstablishForm extends FormWidget
 {
     private Sms $sms;
 

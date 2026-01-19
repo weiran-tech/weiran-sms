@@ -2,12 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Sms\Http\MgrPage;
+namespace Weiran\Sms\Http\Backend\Store;
 
 use Weiran\Framework\Validation\Rule;
 use Weiran\MgrPage\Classes\Form\FormSettingBase;
 
-class FormSettingVolc extends FormSettingBase
+class StoreVolcForm extends FormSettingBase
 {
     protected string $title = '火山云短信配置';
 

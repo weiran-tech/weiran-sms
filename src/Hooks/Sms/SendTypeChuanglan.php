@@ -6,7 +6,7 @@ namespace Weiran\Sms\Hooks\Sms;
 
 use Weiran\Core\Services\Contracts\ServiceArray;
 use Weiran\Sms\Classes\ChuanglanSmsProvider;
-use Weiran\Sms\Http\MgrPage\FormSettingChuanglan;
+use Weiran\Sms\Http\Backend\Store\StoreChuanglanForm;
 
 class SendTypeChuanglan implements ServiceArray
 {
@@ -20,7 +20,7 @@ class SendTypeChuanglan implements ServiceArray
         return [
             'title'    => '创蓝',
             'provider' => ChuanglanSmsProvider::class,
-            'setting'  => FormSettingChuanglan::class,
+            'setting'  => StoreChuanglanForm::class,
             'route'    => 'weiran-sms:backend.store.chuanglan',
         ];
     }

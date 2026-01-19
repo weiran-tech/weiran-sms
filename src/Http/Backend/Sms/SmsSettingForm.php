@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Sms\Http\MgrPage;
+namespace Weiran\Sms\Http\Backend\Sms;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -21,7 +21,7 @@ use Weiran\System\Exceptions\SettingKeyNotMatchException;
 use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 use Weiran\System\Setting\Repository\SettingRepository;
 
-class FormSettingSms extends FormSettingBase
+class SmsSettingForm extends FormSettingBase
 {
     protected string $group = 'weiran-sms::sms';
 

@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Sms\Http\Request\Backend;
+namespace Weiran\Sms\Http\Backend;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
@@ -10,10 +10,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Weiran\Framework\Classes\Resp;
-use Weiran\MgrPage\Http\Request\Backend\BackendController;
+use Weiran\MgrPage\Http\Backend\BackendController;
 use Weiran\Sms\Action\Sms;
-use Weiran\Sms\Http\MgrPage\FormEstablishSms;
-use Weiran\Sms\Http\MgrPage\FormSettingSms;
+use Weiran\Sms\Http\Backend\Sms\SmsEstablishForm;
+use Weiran\Sms\Http\Backend\Sms\SmsSettingForm;
 use Weiran\System\Exceptions\SettingKeyNotMatchException;
 use Weiran\System\Exceptions\SettingValueOutOfRangeException;
 
@@ -56,7 +56,7 @@ class SmsController extends BackendController
      */
     public function establish()
     {
-        return (new FormEstablishSms())->render();
+        return (new SmsEstablishForm())->render();
     }
 
     /**
@@ -84,7 +84,7 @@ class SmsController extends BackendController
      */
     public function store()
     {
-        return (new FormSettingSms())->render();
+        return (new SmsSettingForm())->render();
     }
 
     private function action(): Sms

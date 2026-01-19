@@ -6,7 +6,7 @@ namespace Weiran\Sms\Hooks\Sms;
 
 use Weiran\Core\Services\Contracts\ServiceArray;
 use Weiran\Sms\Classes\VolcSmsProvider;
-use Weiran\Sms\Http\MgrPage\FormSettingVolc;
+use Weiran\Sms\Http\Backend\Store\StoreVolcForm;
 
 /**
  * 火山云
@@ -23,7 +23,7 @@ class SendTypeVolc implements ServiceArray
         return [
             'title'    => '火山云',
             'provider' => VolcSmsProvider::class,
-            'setting'  => FormSettingVolc::class,
+            'setting'  => StoreVolcForm::class,
             'route'    => 'weiran-sms:backend.store.volc',
         ];
     }

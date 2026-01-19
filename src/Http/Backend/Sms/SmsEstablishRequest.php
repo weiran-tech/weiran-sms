@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Sms\Http\Validation;
+namespace Weiran\Sms\Http\Backend\Sms;
 
 use Weiran\Framework\Application\Request;
 use Weiran\Framework\Validation\Rule;

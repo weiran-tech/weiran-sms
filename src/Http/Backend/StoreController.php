@@ -2,15 +2,15 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Sms\Http\Request\Backend;
+namespace Weiran\Sms\Http\Backend;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
-use Weiran\MgrPage\Http\Request\Backend\BackendController;
-use Weiran\Sms\Http\MgrPage\FormSettingAliyun;
-use Weiran\Sms\Http\MgrPage\FormSettingChuanglan;
-use Weiran\Sms\Http\MgrPage\FormSettingLianLu;
-use Weiran\Sms\Http\MgrPage\FormSettingVolc;
+use Weiran\MgrPage\Http\Backend\BackendController;
+use Weiran\Sms\Http\Backend\Store\StoreAliyunForm;
+use Weiran\Sms\Http\Backend\Store\StoreChuanglanForm;
+use Weiran\Sms\Http\Backend\Store\StoreLianLuForm;
+use Weiran\Sms\Http\Backend\Store\StoreVolcForm;
 
 /**
  * 短信控制器
@@ -31,7 +31,7 @@ class StoreController extends BackendController
      */
     public function aliyun()
     {
-        return (new FormSettingAliyun())->render();
+        return (new StoreAliyunForm())->render();
     }
 
     /**
@@ -39,7 +39,7 @@ class StoreController extends BackendController
      */
     public function chuanglan()
     {
-        return (new FormSettingChuanglan())->render();
+        return (new StoreChuanglanForm())->render();
     }
 
     /**
@@ -47,7 +47,7 @@ class StoreController extends BackendController
      */
     public function lianlu()
     {
-        return (new FormSettingLianLu())->render();
+        return (new StoreLianLuForm())->render();
     }
 
     /**
@@ -55,6 +55,6 @@ class StoreController extends BackendController
      */
     public function volc()
     {
-        return (new FormSettingVolc())->render();
+        return (new StoreVolcForm())->render();
     }
 }
